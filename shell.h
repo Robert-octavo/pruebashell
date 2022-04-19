@@ -15,6 +15,6 @@ char *str_concat(char *str1, char *str2);
 int str_lenght(char *string);
 char str_compare(char *str1, char *str2, int n);
 char *_getenv(const char *name);
-void print_env(void);
-int builtin(char *comando[]);
+int print_env(void);
+int *builtin(char *comando);
 #endif

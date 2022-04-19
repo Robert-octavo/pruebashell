@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * _getenv - Function that get the PATH from env
- * @name: pointer ro string - name
+ * @name: pointer to string - name
  * Return: On succes return the NULL if it fails
  */
 char *_getenv(const char *name)
@@ -24,7 +24,7 @@ char *_getenv(const char *name)
  * Return: Nothing
  */
 
-void print_env(void)
+int print_env(void)
 {
 	char **env = environ;
 	int i = 0;
@@ -35,4 +35,5 @@ void print_env(void)
 		write(1, "\n", 1);
 		++i;
 	}
+	return (1);
 }

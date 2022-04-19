@@ -10,14 +10,16 @@ char *findpath(char *comando)
 {
 	char *path = NULL, *ctoprint = NULL;
 	struct stat stats;
-	char *token = NULL;
+	char *token = NULL, *auxpath = NULL;
 	int i = 0;
 	/*char *c_source;*/
 
 	if (stat(comando, &stats) == 0)
 		return (comando);
 	path = _getenv("PATH");
-	token = strtok(path, ":");
+	auxpath = malloc(strlen(path) + 1);
+	auxpath = strcpy(auxpath, path);
+	token = strtok(auxpath, ":\n");
 	comando = str_concat("/", comando);
 	/*printf("desde el findpath [%s]",comando);*/
 	/*
@@ -29,18 +31,20 @@ char *findpath(char *comando)
 	{
 		//printf("entro al ciclo en findpath [%d]\n",i);
 		ctoprint = str_concat(token, comando);
-		printf("Cadena a buscar[%s]\n", ctoprint);
+		//printf("Cadena a buscar[%s]\n", ctoprint);
 		if (stat(ctoprint, &stats) == 0)
 		{
-			printf("//[path][%s]", ctoprint);
+			//printf("//[path][%s]", ctoprint);
 			free(comando);
+			free(auxpath);
 			return (ctoprint);
 		}
 		free(ctoprint);
-		token = strtok(NULL, ":");
+		token = strtok(NULL, ":\n");
 		//printf("\ntoken : [%s]--\n", token);
 		i++;
 	}
 	/*printf("\nComando a ejecutar: %s", ctoprint);*/
+	free(auxpath);
 	return (NULL);
 }
