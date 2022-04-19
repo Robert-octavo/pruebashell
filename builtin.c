@@ -5,11 +5,18 @@
  * @comando: comando a verificar
  * Return: Integer
  */
- int *builtin(char *comando)
+ int builtin(char *comando)
 {
     if (str_compare(comando, "exit", 4) == 0)
+    {
+        free(comando);
         exit(EXIT_SUCCESS);
-    else if (str_compare(comando, "env", 3) == 0)
+        return (1);
+    }else if (str_compare(comando, "env", 3) == 0)
+    {
         print_env();
-    return (0);
+        free(comando);
+        return (1);
+    }else
+        return (0);
 }

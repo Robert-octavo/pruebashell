@@ -9,7 +9,7 @@ int main(/*int argc, char *argv[], char *envp[]*/)
 	char *comando[100], *token, *linea = NULL;
 	char *path_com = NULL; /*PATH + comando*/
 	size_t i, n;
-	int status, function = 0;
+	int status;/* function = 0;*/
 
 	while (1)
 	{
@@ -18,28 +18,20 @@ int main(/*int argc, char *argv[], char *envp[]*/)
 		fflush(stdin);
 		if (getline(&linea, &n, stdin) == -1)
 			break;
-		/*correct error - Permission denied when press enter*/
 		if (*linea == '\n' || *linea == '\t')
 			continue;
 		token = strtok(linea, " \t\n\r");
 		for (i = 0; i < 100 && token != NULL; i++)
-		{
-			comando[i] = token;
-			token = strtok(NULL, " \t\n\r");
-		}
+			comando[i] = token, token = strtok(NULL, " \t\n\r");
 		comando[i] = NULL;
-		builtin(comando[0]);
 		path_com = findpath(comando[0]);
-		if (function == 0)
+		if (builtin(comando[0]) == 0)
 		{
 			hijo = fork();
 			if (hijo == 0)
 			{
 				if (execve(path_com, comando, NULL))
-				{
-					perror("execve");
-					exit(EXIT_FAILURE);
-				}
+					perror("execve"), exit(EXIT_FAILURE);
 			}
 			if (hijo > 0)
 			{

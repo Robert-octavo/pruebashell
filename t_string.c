@@ -66,7 +66,11 @@ char *str_concat(char *str1, char *str2)
 	/*Reservamos memoria para concatenar ambas cadenas*/
 	cstring = malloc(sizeof(char) * (lenght1 + lenght2 + 1));
 	if (cstring == NULL)
+	{
+		free(cstring);
 		return (NULL);
+	}
+
 	while (*str1)
 	{
 		cstring[i] = *str1;

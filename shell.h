@@ -16,5 +16,5 @@ int str_lenght(char *string);
 char str_compare(char *str1, char *str2, int n);
 char *_getenv(const char *name);
 int print_env(void);
-int *builtin(char *comando);
+int builtin(char *comando);
 #endif

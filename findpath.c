@@ -29,19 +29,16 @@ char *findpath(char *comando)
 	*/
 	while (token != NULL)
 	{
-		//printf("entro al ciclo en findpath [%d]\n",i);
 		ctoprint = str_concat(token, comando);
-		//printf("Cadena a buscar[%s]\n", ctoprint);
+
 		if (stat(ctoprint, &stats) == 0)
 		{
-			//printf("//[path][%s]", ctoprint);
 			free(comando);
 			free(auxpath);
 			return (ctoprint);
 		}
 		free(ctoprint);
 		token = strtok(NULL, ":\n");
-		//printf("\ntoken : [%s]--\n", token);
 		i++;
 	}
 	/*printf("\nComando a ejecutar: %s", ctoprint);*/
