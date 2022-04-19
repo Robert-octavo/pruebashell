@@ -31,11 +31,12 @@ int main(/*int argc, char *argv[], char *envp[]*/)
 			if (hijo == 0)
 			{
 				if (execve(path_com, comando, NULL))
-					perror("execve"), exit(EXIT_FAILURE);
+					perror("execve"), free(linea), exit(EXIT_FAILURE);
 			}
 			if (hijo > 0)
 			{
 				wait(&status);
+				free(linea);
 			}
 		}
 		linea = NULL;

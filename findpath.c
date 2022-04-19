@@ -42,6 +42,7 @@ char *findpath(char *comando)
 		i++;
 	}
 	/*printf("\nComando a ejecutar: %s", ctoprint);*/
+	free(comando);
 	free(auxpath);
 	return (NULL);
 }
